@@ -17,7 +17,7 @@ public class CustomerDaoImpl implements CustomerDao {
     PreparedStatement pstm;
 
     @Override
-    public boolean saveCustomer(Customer customer) throws SQLException {
+    public boolean save(Customer customer) throws SQLException {
         connection = ConnectionManager.getInstance().getConnection();
 
         pstm = connection.prepareStatement("INSERT INTO customer VALUES (?,?,?,?)");
@@ -31,11 +31,11 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public Customer searchCustomer(int id) throws SQLException {
+    public Customer getData(String id) throws SQLException {
         connection = ConnectionManager.getInstance().getConnection();
 
         pstm = connection.prepareStatement("SELECT * FROM customer WHERE cust_id=?");
-        pstm.setInt(1, id);
+        pstm.setString(1, id);
 
         ResultSet resultSet = pstm.executeQuery();
         if (resultSet.next()) {
@@ -50,7 +50,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public boolean updateCustomer(Customer customer) throws SQLException {
+    public boolean update(Customer customer) throws SQLException {
         connection = ConnectionManager.getInstance().getConnection();
 
         pstm = connection.prepareStatement("UPDATE customer SET cust_name = ? , cust_address = ? , cust_salary = ? WHERE cust_id=?");
@@ -63,17 +63,17 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public boolean deleteCustomer(int id) throws SQLException {
+    public boolean delete(String id) throws SQLException {
         connection = ConnectionManager.getInstance().getConnection();
 
         pstm = connection.prepareStatement("DELETE FROM customer WHERE cust_id=?");
-        pstm.setInt(1, id);
+        pstm.setString(1, id);
 
         return pstm.executeUpdate() > 0;
     }
 
     @Override
-    public List<Customer> getAllCustomers() throws SQLException {
+    public List<Customer> getAll() throws SQLException {
         connection = ConnectionManager.getInstance().getConnection();
 
         pstm = connection.prepareStatement("SELECT * FROM customer");

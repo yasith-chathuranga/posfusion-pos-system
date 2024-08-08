@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.bo.BOFactory;
 import com.example.backend.bo.custom.CustomerBo;
 import com.example.backend.bo.custom.impl.CustomerBoImpl;
 import com.example.backend.dto.CustomerDto;
@@ -18,7 +19,7 @@ import java.util.List;
 @WebServlet(urlPatterns = "/customer")
 public class CustomerController extends HttpServlet {
 
-    CustomerBo customerBo = new CustomerBoImpl();
+    CustomerBo customerBo = (CustomerBo) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.CUSTOMER);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -62,7 +63,7 @@ public class CustomerController extends HttpServlet {
                 }
                 return;
             }
-            int id = Integer.parseInt(req.getParameter("id"));
+            String id = req.getParameter("id");
             CustomerDto customerDto = customerBo.searchCustomer(id);
             if (customerDto != null){
                 resp.setContentType("application/json");
@@ -101,7 +102,7 @@ public class CustomerController extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
+        String id = req.getParameter("id");
 
         try {
             if (customerBo.deleteCustomer(id)){

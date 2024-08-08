@@ -1,6 +1,7 @@
 package com.example.backend.bo.custom.impl;
 
 import com.example.backend.bo.custom.ItemBo;
+import com.example.backend.dao.DAOFactory;
 import com.example.backend.dao.custom.ItemDao;
 import com.example.backend.dao.custom.impl.ItemDaoImpl;
 import com.example.backend.dto.ItemDto;
@@ -12,11 +13,11 @@ import java.util.List;
 
 public class ItemBoImpl implements ItemBo {
 
-    ItemDao itemDao = new ItemDaoImpl();
+    ItemDao itemDao = (ItemDao) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.ITEM);
 
     @Override
     public boolean addItem(ItemDto itemDto) throws SQLException {
-        return itemDao.addItem(
+        return itemDao.save(
                 new Item(
                         itemDto.getId(),
                         itemDto.getName(),
@@ -27,8 +28,8 @@ public class ItemBoImpl implements ItemBo {
     }
 
     @Override
-    public ItemDto searchItem(int id) throws SQLException {
-        ItemDto itemDto = itemDao.searchItem(id);
+    public ItemDto searchItem(String id) throws SQLException {
+        Item itemDto = itemDao.getData(id);
 
         if (itemDto != null) {
             return new ItemDto(
@@ -43,7 +44,7 @@ public class ItemBoImpl implements ItemBo {
 
     @Override
     public boolean updateItem(ItemDto itemDto) throws SQLException {
-        return itemDao.updateItem(
+        return itemDao.update(
                 new Item(
                         itemDto.getId(),
                         itemDto.getName(),
@@ -54,13 +55,13 @@ public class ItemBoImpl implements ItemBo {
     }
 
     @Override
-    public boolean deleteItem(int id) throws SQLException {
-        return itemDao.deleteItem(id);
+    public boolean deleteItem(String id) throws SQLException {
+        return itemDao.delete(id);
     }
 
     @Override
     public List<ItemDto> getAllItems() throws SQLException {
-        List<Item> itemList = itemDao.getAllItems();
+        List<Item> itemList = itemDao.getAll();
 
         List<ItemDto> itemDtoList = new ArrayList<>();
 

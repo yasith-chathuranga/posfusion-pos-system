@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.bo.BOFactory;
 import com.example.backend.bo.custom.ItemBo;
 import com.example.backend.bo.custom.impl.ItemBoImpl;
 import com.example.backend.dto.ItemDto;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 public class ItemController extends HttpServlet {
 
     static Logger logger = Logger.getLogger(ItemController.class.getName());
-    ItemBo itemBo = new ItemBoImpl();
+    ItemBo itemBo = (ItemBo) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ITEM);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -65,7 +66,7 @@ public class ItemController extends HttpServlet {
             resp.setContentType("application/json");
             Jsonb jsonb = JsonbBuilder.create();
             try {
-                jsonb.toJson(itemBo.searchItem(Integer.parseInt(id)), resp.getWriter());
+                jsonb.toJson(itemBo.searchItem(id), resp.getWriter());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -102,7 +103,7 @@ public class ItemController extends HttpServlet {
         var writer = resp.getWriter();
 
         try{
-            boolean isDeleted = itemBo.deleteItem(Integer.parseInt(id));
+            boolean isDeleted = itemBo.deleteItem(id);
             if (isDeleted){
                 resp.setStatus(HttpServletResponse.SC_CREATED);
                 writer.write("Item Deleted Successfully");
