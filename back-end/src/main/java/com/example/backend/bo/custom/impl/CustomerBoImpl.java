@@ -8,6 +8,7 @@ import com.example.backend.entity.Customer;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class CustomerBoImpl implements CustomerBo {
 
@@ -51,5 +52,16 @@ public class CustomerBoImpl implements CustomerBo {
     @Override
     public boolean deleteCustomer(int id) throws SQLException {
         return customerDao.deleteCustomer(id);
+    }
+
+    @Override
+    public List<CustomerDto> getAllCustomers() throws SQLException {
+        List<Customer> customerList = customerDao.getAllCustomers();
+
+        if (customerList != null) {
+            return customerList.stream().map(customer -> new CustomerDto(customer.getId(), customer.getName(), customer.getAddress(), customer.getSalary())).toList();
+        } else {
+            return null;
+        }
     }
 }

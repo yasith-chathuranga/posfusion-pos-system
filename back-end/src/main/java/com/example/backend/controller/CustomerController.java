@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(urlPatterns = "/customer")
 public class CustomerController extends HttpServlet {
@@ -51,19 +52,25 @@ public class CustomerController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //System.out.println("=====================================================Get Customer");
         try{
+            if (req.getParameter("id").equals("all")){
+                List<CustomerDto> allCustomers = customerBo.getAllCustomers();
+                if (allCustomers != null){
+                    resp.setContentType("application/json");
+                    Jsonb jsonb = JsonbBuilder.create();
+                    jsonb.toJson(allCustomers, resp.getWriter());
+                }
+                return;
+            }
             int id = Integer.parseInt(req.getParameter("id"));
-            System.out.println(id);
             CustomerDto customerDto = customerBo.searchCustomer(id);
-            System.out.println(customerDto);
             if (customerDto != null){
                 resp.setContentType("application/json");
                 Jsonb jsonb = JsonbBuilder.create();
                 jsonb.toJson(customerDto, resp.getWriter());
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
