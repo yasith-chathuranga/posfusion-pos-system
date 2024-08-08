@@ -94,6 +94,7 @@ function validate(customer) {
 }
 
 function loadTable(customer) {
+  console.log(customer,"=============#$$$$$$$$$========================table Load");
   $("#customerManage .tableRow").append(
     "<tr> " +
       "<td>" +
@@ -120,27 +121,31 @@ function loadTable(customer) {
 //   return null;
 // }
 
-function createCustomerId() {
-  let customers = getAllCustomers();
+async function createCustomerId() {
+  let customers = await getAllCustomers();
+  console.log(customers,"Enna yanna apith");
 
   if (!customers || customers.length === 0) {
     return "C00-001";
   } else {
     let lastCustomer = customers[customers.length - 1];
+    console.log(lastCustomer,"_-------------------------last");
     let id =
       lastCustomer && lastCustomer.custId ? lastCustomer.custId : "C00-000";
 
+    console.log(id);
     // Extract numeric part (assuming the format is "C00-###")
     let number = parseInt(id.split("-")[1]);
     number++;
-
-    // Create new ID with desired format ("C00-001")
-    return "C00-" + number.toString().padStart(3, "0");
+    console.log(number)
+    const nextId = 'C0' + number;
+    console.log(nextId);
+    $('#CustomerManage .custId').val(nextId)
   }
 }
 
 function refresh() {
-  $("#customerManage .custId").val(createCustomerId());
+  createCustomerId()
   $("#customerManage .custName").val("");
   $("#customerManage .custAddress").val("");
   $("#customerManage .custSalary").val("");
@@ -157,56 +162,71 @@ $("#customerManage .cleatBtn").click(function () {
 
 $("#customerManage .searchBtn").click(function () {
   let customer = searchCustomer($("#customerManage .custId").val());
-  if (customer) {
-    $("#customerManage .custName").val(customer.custName);
-    $("#customerManage .custAddress").val(customer.custAddress);
-    $("#customerManage .custSalary").val(customer.custSalary);
-  } else {
-    alert("Customer Not Found");
-  }
-});
-
-function searchCustomer(id) {
-  let customers = getAllCustomers();
-  let customer = customers.find((c) => c.custId === id);
-  return customer;
+})
+  async function searchCustomer(id) {
+    try {
+      const customers = await getAllCustomers();
+      let customer = customers.find(c => c.custId === id);
+      console.log(customer, " =================")
+      if (customer) {
+        $('#CustomerManage .custName').val(customer.custName);
+        $('#CustomerManage .custAddress').val(customer.custAddress);
+        $('#CustomerManage .custSalary').val(customer.custSalary);
+      } else {
+        alert('Customer Not Found');
+      }
+      return customer;
+    } catch (error) {
+      console.error(error)
+      return null;
+    }
 }
 
-$("#customerManage .updateBtn").click(function () {
+  $('#CustomerManage .updateBtn').click(async function () {
   let UpdateCustomer = {
-    custId: "C00",
-    custName: $("#customerManage .custName").val(),
-    custAddress: $("#customerManage .custAddress").val(),
-    custSalary: $("#customerManage .custSalary").val(),
+    custId: 'C00',
+    custName: $('#CustomerManage .custName').val(),
+    custAddress: $('#CustomerManage .custAddress').val(),
+    custSalary: $('#CustomerManage .custSalary').val()
   };
 
   let validResult = validate(UpdateCustomer);
 
   UpdateCustomer.custId = $("#customerManage .custId").val();
 
-  if (validResult) {
-    let customers = getAllCustomers();
+    if (validResult) {
+      let customers = await getAllCustomers();
     let index = customers.findIndex((c) => c.custId === UpdateCustomer.custId);
     updateCustomer(index, UpdateCustomer);
+    alert('Customer Updated');
     refresh();
   }
 });
 
 function reloadTable() {
-  let customers = getAllCustomers();
-  $("#customerManage .tableRow").empty();
-  customers.forEach((c) => {
-    loadTable(c);
-  });
+  $('#CustomerManage .tableRow').empty()
+  console.log(customers,"=====================================================table Load");
+  // customers.forEach(c => {
+  //     loadTable(c);
+  // });
+  getAllCustomers().then((customer) =>{
+    customer.forEach((customer) => {
+      loadTable(customer);
+    })
+  }).catch(
+      (error) => {
+        console.log(error);
+      }
+  )
 }
 
-$("#customerManage .removeBtn").click(function () {
-  let customers = getAllCustomers();
+  $('#CustomerManage .removeBtn').click(async function () {
+    let customers = await getAllCustomers();
   let id = $("#customerManage .custId").val();
 
   let index = customers.findIndex((c) => c.custId === id);
-  if (index >= 0) {
-    deleteCustomer(index);
+    if (index >= 0) {
+      deleteCustomer(id);
     refresh();
   } else {
     alert("Customer Not Found");
