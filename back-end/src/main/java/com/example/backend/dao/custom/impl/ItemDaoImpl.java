@@ -59,4 +59,14 @@ public class ItemDaoImpl implements ItemDao {
 
         return preparedStatement.executeUpdate() > 0;
     }
+
+    @Override
+    public boolean deleteItem(int id) throws SQLException {
+        connection = ConnectionManager.getInstance().getConnection();
+
+        preparedStatement = connection.prepareStatement("DELETE FROM item WHERE item_id=?");
+        preparedStatement.setInt(1, id);
+
+        return preparedStatement.executeUpdate() > 0;
+    }
 }
