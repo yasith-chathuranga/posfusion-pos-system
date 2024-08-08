@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POSFusion</title>
+    <link rel="stylesheet" href="/assests/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <!--header section start-->
+    <header>
+      <a href="#" class="logo" onclick="location.reload();"
+        ><span>POSFusion</span></a
+      >
+
+      <ul class="navbar">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#customerManage" class="nav-link">Customer</a></li>
+        <li><a href="#itemManage" class="nav-link">Item</a></li>
+        <li>
+          <a href="#orderManage" class="nav-link orderManageBtn">Order</a>
+        </li>
+        <li>
+          <a href="#orderDetailsPage" class="nav-link orderDetailsBtn"
+            >Order Details</a
+          >
+        </li>
+        <li><a href="#about" class="nav-link">About</a></li>
+      </ul>
+      <div class="main">
+        <a href="#customerManage" id="button" class="nav-link">Try Free</a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+      </div>
+    </header>
+    <!--header section end-->
+
+    <!--hero section start-->
+    <section id="home">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Welcome to POSFusion</h1>
+            <p>
+              Your all-in-one point of sale solution for seamless business
+              operations. Manage sales, inventory, and customer relationships
+              with ease.
+            </p>
+            <a href="#customerManage" id="button" class="nav-link"
+              >Get Started</a
+            >
+          </div>
+          <div class="hero-image">
+            <img src="/assests/img/heroMan.png" alt="Hero Page Man Image" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--hero section end-->
+
+    <!--customer section start-->
+    <section id="customerManage">
+      <div class="customer-registration-section">
+        <div class="image-container">
+          <img
+            src="/assests/img/customerRegistration.png"
+            alt="Customer Registration Image"
+          />
+        </div>
+        <div class="form-container">
+          <h1>Customer Registration</h1>
+          <form id="customerForm">
+            <label for="customer-id">Customer ID</label>
+            <input
+              class="custId"
+              type="text"
+              id="customer-id"
+              name="customer-id"
+              required
+            />
+            <h5 class="invalidCustId"></h5>
+
+            <label for="customer-name">Customer Name</label>
+            <input
+              class="custName"
+              type="text"
+              id="customer-name"
+              name="customer-name"
+              required
+            />
+            <h5 class="invalidCustName"></h5>
+
+            <label for="customer-address">Customer Address</label>
+            <input
+              class="custAddress"
+              type="text"
+              id="customer-address"
+              name="customer-address"
+              required
+            />
+            <h5 class="invalidCustAddress"></h5>
+
+            <label for="customer-salary">Customer Salary</label>
+            <input
+              class="custSalary"
+              type="number"
+              id="customer-salary"
+              name="customer-salary"
+              required
+            />
+            <h5 class="invalidCustSalary"></h5>
+
+            <div class="button-container">
+              <button type="submit" class="saveBtn">Save Customer</button>
+              <button type="button" class="removeBtn">Remove</button>
+              <button type="button" class="updateBtn">Update</button>
+              <button type="button" class="searchBtn">Get All</button>
+              <button type="reset" class="cleatBtn">Clear All</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="item-details">
+        <table id="customer-table">
+          <thead>
+            <tr>
+              <th>Customer ID</th>
+              <th>Customer Name</th>
+              <th>Customer Address</th>
+              <th>Customer Salary</th>
+            </tr>
+          </thead>
+          <tbody class="tableRow">
+            <!-- Saved customer data will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!--customer section end-->
+
+    <!--item section start-->
+    <section id="itemManage">
+      <div class="item-manage-section">
+        <div class="item-form-container">
+          <h1>Item Manage</h1>
+          <form id="itemForm">
+            <label for="item-code">Item Code</label>
+            <input type="text" id="item-code" name="item-code" class="itemId" />
+            <h5 class="invalidCode"></h5>
+
+            <label for="item-name">Item Name</label>
+            <input
+              type="text"
+              id="item-name"
+              name="item-name"
+              class="itemName"
+            />
+            <h5 class="invalidName"></h5>
+
+            <label for="item-qty">Item Quantity</label>
+            <input
+              type="number"
+              id="item-qty"
+              name="item-qty"
+              class="itemQty"
+            />
+            <h5 class="invalidQty"></h5>
+
+            <label for="unit-price">Unit Price</label>
+            <input
+              type="number"
+              id="unit-price"
+              name="unit-price"
+              class="itemPrice"
+            />
+            <h5 class="invalidPrice"></h5>
+
+            <div class="button-container">
+              <button type="submit" class="saveBtn">Add Item</button>
+              <button type="button" class="removeBtn">Remove</button>
+              <button type="button" class="updateBtn">Update</button>
+              <button type="button" class="searchBtn">Get All</button>
+              <button type="reset" class="cleatBtn">Clear All</button>
+            </div>
+          </form>
+        </div>
+        <div class="item-image-container">
+          <img src="/assests/img/itemManage.png" alt="Item Manage Image" />
+        </div>
+      </div>
+      <div class="item-details">
+        <table id="item-table">
+          <thead>
+            <tr>
+              <th>Item Code</th>
+              <th>Item Name</th>
+              <th>Item Quantity</th>
+              <th>Unit Price</th>
+            </tr>
+          </thead>
+          <tbody class="tableRow"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!--item section end-->
+
+    <!--order section start-->
+    <section id="orderManage">
+      <div class="order-container">
+        <div class="invoice-details">
+          <h2>Invoice Details</h2>
+          <form action="">
+            <div>
+              <div>
+                <label for="">Order Id</label>
+                <input type="text" class="orderId" />
+              </div>
+              <div>
+                <label for="">Order Date</label>
+                <input type="date" class="orderDate" />
+              </div>
+              <div>
+                <label for="">Customer</label>
+                <select class="customers" name="" id=""></select>
+              </div>
+              <div>
+                <label for="">Customer ID</label>
+                <input type="text" class="custId" />
+              </div>
+              <div>
+                <label for="">Customer Name</label>
+                <input type="text" class="custName" />
+              </div>
+              <div>
+                <label for="">Customer Salary</label>
+                <input type="number" class="custSalary" />
+              </div>
+            </div>
+            <div>
+              <label for="">Address</label>
+              <input type="text" class="custAddress" />
+            </div>
+          </form>
+        </div>
+
+        <div class="item-select">
+          <h2>Item Select</h2>
+          <form action="">
+            <div>
+              <div>
+                <label for="">Item</label>
+                <select name="" id="" class="itemCmb"></select>
+              </div>
+              <div>
+                <label for="">Item Code</label>
+                <input type="text" class="itemCode" />
+              </div>
+            </div>
+            <div>
+              <div>
+                <label for="">Item Name</label>
+                <input type="text" class="itemName" />
+              </div>
+              <div>
+                <label for="">Item Price</label>
+                <input type="number" class="itemPrice" />
+              </div>
+              <div>
+                <label for="">Item Quantity</label>
+                <input type="number" class="itemQty" />
+              </div>
+            </div>
+            <div>
+              <label for="">Order Quantity</label>
+              <input type="number" class="orderQty" />
+            </div>
+            <button class="addBtn">Add Item</button>
+          </form>
+        </div>
+
+        <div class="payment">
+          <h2>Payment</h2>
+          <h1>
+            Total :
+            <span style="color: var(--main-color)" class="Total">00.0</span>
+            Rs/=
+          </h1>
+          <h2>
+            Sub Total :
+            <span style="color: red" class="SubTotal">00.0</span> Rs/=
+          </h2>
+
+          <form>
+            <div>
+              <div>
+                <label for="">Cash</label>
+                <input type="number" class="Cash" />
+              </div>
+              <div>
+                <label for="">Discount</label>
+                <input type="number" class="Discount" />
+              </div>
+            </div>
+            <div>
+              <label for="">Balance</label>
+              <input type="number" class="Balance" />
+            </div>
+          </form>
+          <button class="placeOrder">Purchase</button>
+        </div>
+      </div>
+      <div class="item-details">
+        <table id="item-details">
+          <thead>
+            <tr>
+              <th>Item Code</th>
+              <th>Item Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody class="tableRow"></tbody>
+        </table>
+      </div>
+    </section>
+    <!--order section end-->
+
+    <!-- Start order details section -->
+    <section id="orderDetailsPage">
+      <div>
+        <h1 class="title">Order Details</h1>
+        <div id="orderDetails">
+          <form class="inputData" id="orderDetailsForm">
+            <div>
+              <label for="">Enter order ID here</label>
+              <input type="text" class="orderId" />
+              <h5 class="invalidCode"></h5>
+            </div>
+          </form>
+          <div class="btn-set" style="margin-left: 200px">
+            <div class="btn-box">
+              <button class="btn searchBtn">Search</button>
+            </div>
+            <div class="btn-box">
+              <button class="btn clearBtn">Clear All</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Order Id</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Discount (%)</th>
+                <th>Sub Total</th>
+              </tr>
+            </thead>
+            <tbody class="tableRow"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- End orders details section -->
+
+    <!--about section start-->
+    <section id="about" class="about-section">
+      <h1>About POSFusion</h1>
+      <p>
+        POSFusion is an innovative point of sale system designed to streamline
+        your business operations, enhance customer experience, and drive growth.
+        Our system integrates seamlessly with various platforms and offers a
+        range of features tailored to meet the unique needs of businesses of all
+        sizes.
+      </p>
+      <div class="features">
+        <div class="card">
+          <div class="icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              height="38px"
+              width="38px"
+              version="1.1"
+              id="heart"
+              viewBox="0 0 471.701 471.701"
+              xml:space="preserve"
+            >
+              <linearGradient id="gradientColor">
+                <stop offset="5%" stop-color="#7eaaff"></stop>
+                <stop offset="95%" stop-color="#ff48fb"></stop>
+              </linearGradient>
+              <g>
+                <path
+                  d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1   c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3   l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4   C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3   s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4   c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3   C444.801,187.101,434.001,213.101,414.401,232.701z"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <p class="title">Feature One</p>
+          <p class="text">Seamless Integration</p>
+        </div>
+        <div class="card">
+          <div class="icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              height="38px"
+              width="38px"
+              version="1.1"
+              id="heart"
+              viewBox="0 0 471.701 471.701"
+              xml:space="preserve"
+            >
+              <linearGradient id="gradientColor">
+                <stop offset="5%" stop-color="#7eaaff"></stop>
+                <stop offset="95%" stop-color="#ff48fb"></stop>
+              </linearGradient>
+              <g>
+                <path
+                  d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1   c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3   l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4   C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3   s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4   c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3   C444.801,187.101,434.001,213.101,414.401,232.701z"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <p class="title">Feature Two</p>
+          <p class="text">Friendly Interface</p>
+        </div>
+        <div class="card">
+          <div class="icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              height="38px"
+              width="38px"
+              version="1.1"
+              id="heart"
+              viewBox="0 0 471.701 471.701"
+              xml:space="preserve"
+            >
+              <linearGradient id="gradientColor">
+                <stop offset="5%" stop-color="#7eaaff"></stop>
+                <stop offset="95%" stop-color="#ff48fb"></stop>
+              </linearGradient>
+              <g>
+                <path
+                  d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1   c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3   l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4   C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3   s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4   c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3   C444.801,187.101,434.001,213.101,414.401,232.701z"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <p class="title">Feature Three</p>
+          <p class="text">Real-time Analytics</p>
+        </div>
+      </div>
+
+      <!--footer section start-->
+      <footer>
+        <div class="footer-content">
+          <h3>POSFusion</h3>
+          <p>
+            Now you can contact us through the following social media platforms!
+          </p>
+          <ul class="socials">
+            <li>
+              <a href="#"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-google-plus"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-youtube"></i></a>
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/yasith-chathuranga-b096032a9/"
+                ><i class="fa fa-linkedin-square"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            copyright &copy;2024 POSFusion. designed by
+            <span>yasith chathuranga</span>
+          </p>
+        </div>
+      </footer>
+      <!--footer section end-->
+    </section>
+    <!--about section end-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="/controller/IndexController.js"></script>
+    <script type="module" src="/controller/CustomerController.js"></script>
+    <script type="module" src="/controller/ItemController.js"></script>
+    <script type="module" src="/controller/OrderController.js"></script>
+    <script type="module" src="/controller/OrderDetailsController.js"></script>
+  </body>
+</html>
