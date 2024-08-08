@@ -37,7 +37,7 @@ $("#itemManage .saveBtn").click(function () {
   }
 });
 
-function validate(item) {
+async function validate(item) {
   let valid = true;
 
   if (/^I00-\d{3}$/.test(item.itemId)) {
@@ -101,14 +101,18 @@ function validate(item) {
 // }
 
 function refresh() {
-  $("#itemManage .itemId").val(createItemId());
-  $("#itemManage .itemName").val("");
-  $("#itemManage .itemQty").val("");
-  $("#itemManage .itemPrice").val("");
-  loadTable();
+  async function refresh() {
+    generateId()
+    $("#itemManage .itemName").val("");
+    $("#itemManage .itemQty").val("");
+    $("#itemManage .itemPrice").val("");
+    loadTable();
+    let count = await getAllItems().length
+    $('.counts .items h2').text(count);
+  }
 }
 
-function createItemId() {
+async function createItemId() {
   let items = getAllItems();
 
   if (!items || items.length === 0) {
@@ -127,8 +131,8 @@ function createItemId() {
   }
 }
 
-function loadTable() {
-  let items = getAllItems();
+async function loadTable() {
+  let items = await getAllItems();
   $("#itemManage .tableRow").empty();
   for (let i = 0; i < items.length; i++) {
     $("#itemManage .tableRow").append(
@@ -162,19 +166,19 @@ $("#itemManage .tableRow").on("click", "tr", function () {
   $("#itemManage .itemPrice").val(price);
 });
 
-$("#itemManage .removeBtn").click(function () {
+$("#itemManage .removeBtn").click(async function () {
   let id = $("#itemManage .itemId").val();
-  let items = getAllItems();
+  let items = await getAllItems();
   let item = items.findIndex((item) => item.itemId === id);
   if (item >= 0) {
-    deleteItem(item);
+    deleteItem(id);
     refresh();
   } else {
     $("#itemManage .invalidCode").text("Item Id does not exist");
   }
 });
 
-$("#itemManage .updateBtn").click(function () {
+$("#itemManage .updateBtn").click(async function () {
   alert("Update");
   let item = {
     itemId: "I00",
@@ -188,7 +192,7 @@ $("#itemManage .updateBtn").click(function () {
   item.itemId = $("#itemManage .itemId").val();
 
   if (valid) {
-    let items = getAllItems();
+    let items = await getAllItems();
     let index = items.findIndex((i) => i.itemId === item.itemId);
     updateItem(index, item);
     refresh();
@@ -199,9 +203,9 @@ $("#itemManage .cleatBtn").click(function () {
   refresh();
 });
 
-$("#itemManage .searchBtn").click(function () {
+$("#itemManage .searchBtn").click(async function () {
   let id = $("#itemManage .itemId").val();
-  let items = getAllItems();
+  let items = await getAllItems();
   let item = items.find((item) => item.itemId === id);
   if (item) {
     $("#itemManage .itemName").val(item.itemName);
