@@ -92,16 +92,7 @@ async function validate(item) {
   return valid;
 }
 
-// function extractNumber(id) {
-//   var match = id.match(/I0(\d+)/);
-//   if (match && match.length > 1) {
-//     return match[1];
-//   }
-//   return null;
-// }
-
-function refresh() {
-  async function refresh() {
+async function refresh() {
     generateId()
     $("#itemManage .itemName").val("");
     $("#itemManage .itemQty").val("");
@@ -109,7 +100,6 @@ function refresh() {
     loadTable();
     let count = await getAllItems().length
     $('.counts .items h2').text(count);
-  }
 }
 
 async function createItemId() {

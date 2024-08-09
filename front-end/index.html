@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>POSFusion</title>
-    <link rel="stylesheet" href="/assests/style.css" />
+    <link rel="stylesheet" href="assests/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -68,7 +68,7 @@
             >
           </div>
           <div class="hero-image">
-            <img src="/assests/img/heroMan.png" alt="Hero Page Man Image" />
+            <img src="assests/img/heroMan.png" alt="Hero Page Man Image" />
           </div>
         </div>
       </div>
@@ -80,50 +80,50 @@
       <div class="customer-registration-section">
         <div class="image-container">
           <img
-            src="/assests/img/customerRegistration.png"
-            alt="Customer Registration Image"
+                  src="assests/img/customerRegistration.png"
+                  alt="Customer Registration Image"
           />
         </div>
         <div class="form-container">
           <h1>Customer Registration</h1>
           <form id="customerForm">
-            <label for="customer-id">Customer ID</label>
+            <label for="">Customer ID</label>
             <input
-              class="custId"
-              type="text"
-              id="customer-id"
-              name="customer-id"
-              required
+                    class="custId"
+                    type="text"
+                    id="customer-id"
+                    name="customer-id"
+                    required
             />
             <h5 class="invalidCustId"></h5>
 
-            <label for="customer-name">Customer Name</label>
+            <label for="">Customer Name</label>
             <input
-              class="custName"
-              type="text"
-              id="customer-name"
-              name="customer-name"
-              required
+                    class="custName"
+                    type="text"
+                    id="customer-name"
+                    name="customer-name"
+                    required
             />
             <h5 class="invalidCustName"></h5>
 
-            <label for="customer-address">Customer Address</label>
+            <label for="">Customer Address</label>
             <input
-              class="custAddress"
-              type="text"
-              id="customer-address"
-              name="customer-address"
-              required
+                    class="custAddress"
+                    type="text"
+                    id="customer-address"
+                    name="customer-address"
+                    required
             />
             <h5 class="invalidCustAddress"></h5>
 
-            <label for="customer-salary">Customer Salary</label>
+            <label for="">Customer Salary</label>
             <input
-              class="custSalary"
-              type="number"
-              id="customer-salary"
-              name="customer-salary"
-              required
+                    class="custSalary"
+                    type="number"
+                    id="customer-salary"
+                    name="customer-salary"
+                    required
             />
             <h5 class="invalidCustSalary"></h5>
 
@@ -140,15 +140,15 @@
       <div class="item-details">
         <table id="customer-table">
           <thead>
-            <tr>
-              <th>Customer ID</th>
-              <th>Customer Name</th>
-              <th>Customer Address</th>
-              <th>Customer Salary</th>
-            </tr>
+          <tr>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Customer Address</th>
+            <th>Customer Salary</th>
+          </tr>
           </thead>
           <tbody class="tableRow">
-            <!-- Saved customer data will be inserted here -->
+          <!-- Saved customer data will be inserted here -->
           </tbody>
         </table>
       </div>
@@ -161,11 +161,11 @@
         <div class="item-form-container">
           <h1>Item Manage</h1>
           <form id="itemForm">
-            <label for="item-code">Item Code</label>
-            <input type="text" id="item-code" name="item-code" class="itemId" />
+            <label for="">Item Code</label>
+            <input type="text" id="item-code" name="item-code" class="itemId" readonly />
             <h5 class="invalidCode"></h5>
 
-            <label for="item-name">Item Name</label>
+            <label for="">Item Name</label>
             <input
               type="text"
               id="item-name"
@@ -174,7 +174,7 @@
             />
             <h5 class="invalidName"></h5>
 
-            <label for="item-qty">Item Quantity</label>
+            <label for="">Item Quantity</label>
             <input
               type="number"
               id="item-qty"
@@ -183,7 +183,7 @@
             />
             <h5 class="invalidQty"></h5>
 
-            <label for="unit-price">Unit Price</label>
+            <label for="">Unit Price</label>
             <input
               type="number"
               id="unit-price"
@@ -202,7 +202,7 @@
           </form>
         </div>
         <div class="item-image-container">
-          <img src="/assests/img/itemManage.png" alt="Item Manage Image" />
+          <img src="assests/img/itemManage.png" alt="Item Manage Image" />
         </div>
       </div>
       <div class="item-details">
@@ -231,7 +231,7 @@
             <div>
               <div>
                 <label for="">Order Id</label>
-                <input type="text" class="orderId" />
+                <input type="text" class="orderId" readonly/>
               </div>
               <div>
                 <label for="">Order Date</label>
@@ -516,10 +516,56 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <script src="/controller/IndexController.js"></script>
-    <script type="module" src="/controller/CustomerController.js"></script>
-    <script type="module" src="/controller/ItemController.js"></script>
-    <script type="module" src="/controller/OrderController.js"></script>
-    <script type="module" src="/controller/OrderDetailsController.js"></script>
-  </body>
+    <script type="module" src="controller/CustomerController.js"></script>
+    <script type="module" src="controller/ItemController.js"></script>
+    <script type="module" src="controller/OrderController.js"></script>
+<!--    <script type="module" src="controller/OrderDetailsController.js"></script>-->
+
+  <script>
+          let menu = document.querySelector("#menu-icon");
+          let navbar = document.querySelector(".navbar");
+
+          menu.onclick = () => {
+      menu.classList.toggle("bx-x");
+      navbar.classList.toggle("open");
+    };
+
+    $(document).ready(function () {
+      $("#home").show();
+
+      $(".nav-link").click(function (event) {
+        event.preventDefault();
+
+        $("section").hide();
+
+        var targetSection = $(this).attr("href");
+
+        $(targetSection).show();
+        switch (targetSection) {
+          case "#customerManage":
+            $(".sectionName").text("Customer Manage");
+            break;
+          case "#itemManage":
+            $(".sectionName").text("Item Manage");
+            break;
+          case "#orderManage":
+            $(".sectionName").text("Order Manage");
+            break;
+          case "#orderDetailsPage":
+            $(".sectionName").text("Order Details Manage");
+            break;
+          default:
+            $(".sectionName").text("Home Page");
+        }
+      });
+    });
+
+    // Disable tab key default focusing
+    document.querySelector("body").addEventListener("keydown", function (event) {
+      if (event.key === "Tab" || event.keyCode === 9) {
+        event.preventDefault();
+      }
+    });
+</script>
+    </body>
 </html>

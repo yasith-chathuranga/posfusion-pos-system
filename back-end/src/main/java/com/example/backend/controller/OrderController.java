@@ -14,8 +14,6 @@ import org.slf4j.Logger;
 
 import java.io.IOException;
 
-import static com.example.backend.controller.ItemController.logger;
-
 @WebServlet(urlPatterns = "/order", loadOnStartup = 1)
 public class OrderController extends HttpServlet {
 

@@ -82,13 +82,4 @@ export function deleteCustomer(index) {
       console.log("Customer Deleted");
     }
   })
-
 }
-
-// export function getAllCustomers(){
-//     console.log("=============================================getAllCustomers");
-//     getAllCustomer().then((customer) =>{
-//         console.log(customer,"=============================================getAllCustomers");
-//         return customer;
-//     })
-// }

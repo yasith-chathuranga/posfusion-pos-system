@@ -113,20 +113,12 @@ function loadTable(customer) {
   );
 }
 
-// function extractNumber(id) {
-//   var match = id.match(/C0(\d+)/);
-//   if (match && match.length > 1) {
-//     return parseInt(match[1]);
-//   }
-//   return null;
-// }
-
 async function createCustomerId() {
   let customers = await getAllCustomers();
   console.log(customers,"Enna yanna apith");
 
   if (!customers || customers.length === 0) {
-    return "C00-001";
+    $('#customerManage .custId').val("C00-001")
   } else {
     let lastCustomer = customers[customers.length - 1];
     console.log(lastCustomer,"_-------------------------last");
@@ -140,7 +132,7 @@ async function createCustomerId() {
     console.log(number)
     const nextId = 'C0' + number;
     console.log(nextId);
-    $('#CustomerManage .custId').val(nextId)
+    $('#customerManage .custId').val(nextId)
   }
 }
 
@@ -169,9 +161,9 @@ $("#customerManage .searchBtn").click(function () {
       let customer = customers.find(c => c.custId === id);
       console.log(customer, " =================")
       if (customer) {
-        $('#CustomerManage .custName').val(customer.custName);
-        $('#CustomerManage .custAddress').val(customer.custAddress);
-        $('#CustomerManage .custSalary').val(customer.custSalary);
+        $('#customerManage .custName').val(customer.custName);
+        $('#customerManage .custAddress').val(customer.custAddress);
+        $('#customerManage .custSalary').val(customer.custSalary);
       } else {
         alert('Customer Not Found');
       }
@@ -182,12 +174,12 @@ $("#customerManage .searchBtn").click(function () {
     }
 }
 
-  $('#CustomerManage .updateBtn').click(async function () {
+  $('#customerManage .updateBtn').click(async function () {
   let UpdateCustomer = {
     custId: 'C00',
-    custName: $('#CustomerManage .custName').val(),
-    custAddress: $('#CustomerManage .custAddress').val(),
-    custSalary: $('#CustomerManage .custSalary').val()
+    custName: $('#customerManage .custName').val(),
+    custAddress: $('#customerManage .custAddress').val(),
+    custSalary: $('#customerManage .custSalary').val()
   };
 
   let validResult = validate(UpdateCustomer);
@@ -205,7 +197,7 @@ $("#customerManage .searchBtn").click(function () {
 
 async function reloadTable() {
   let customers = await getAllCustomers();
-  $('#CustomerManage .tableRow').empty()
+  $('#customerManage .tableRow').empty()
   console.log(customers,"=====================================================table Load");
   // customers.forEach(c => {
   //     loadTable(c);
@@ -221,7 +213,7 @@ async function reloadTable() {
   )
 }
 
-  $('#CustomerManage .removeBtn').click(async function () {
+  $('#customerManage .removeBtn').click(async function () {
     let customers = await getAllCustomers();
   let id = $("#customerManage .custId").val();
 

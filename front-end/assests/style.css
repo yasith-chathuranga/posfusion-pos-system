@@ -595,7 +595,6 @@ tbody tr:hover {
 }
 
 .about-section {
-  margin-top: 4rem;
   padding: 50px;
   text-align: center;
   color: white;
@@ -603,6 +602,7 @@ tbody tr:hover {
 }
 
 .about-section h1 {
+  margin-top: 3rem;
   font-size: 3em;
   margin-bottom: 20px;
 }
@@ -621,9 +621,9 @@ tbody tr:hover {
 
 .card {
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   min-width: 200px;
-  height: 250px;
+  height: 200px;
   background-color: #303030;
   margin: 10px;
   border-radius: 10px;
@@ -690,7 +690,7 @@ tbody tr:hover {
 }
 
 .card:hover {
-  height: 270px;
+  height: 240px;
 }
 
 .card:hover .text {
@@ -714,13 +714,13 @@ tbody tr:hover {
 footer {
   position: absolute;
   margin-top: 2rem;
-  bottom: -1px;
+  bottom: 0px;
   left: 0;
   right: 0;
   background: #111;
   height: auto;
   width: 100vw;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   padding-top: 40px;
   color: #fff;
 }
