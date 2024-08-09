@@ -1,4 +1,11 @@
-# POSFusion POS System
+# POSFusion POS System (JAVAEE)
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Controllers and Endpoints](#controllers-and-endpoints)
+- [Getting Started](#getting-started)
+- [License](#license)
 
 ## Overview
 
@@ -53,6 +60,11 @@ POSFusion POS System is a web-based Point of Sale (POS) application designed to 
 2. Clone the Repository: `git clone https://github.com/yasith-chathuranga/posfusion-pos-system.git`
 3. Setup Database: Configure your database settings in `application.properties`
 4. Build and Run: Deploy the WAR file to Tomcat and access the application.
+
+**Clone the Repository:**  
+```bash
+   git clone https://github.com/yasith-chathuranga/posfusion-pos-system.git
+```
 
 ### License
 This project is licensed under the [MIT License](LICENSE).
