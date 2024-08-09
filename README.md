@@ -33,7 +33,7 @@ POSFusion POS System is a web-based Point of Sale (POS) application designed to 
 
 - **Frontend:** HTML, CSS, JavaScript, jQuery
 - **Backend:** Java EE, Tomcat
-- **API Documentation:** Postman Documentation
+- **API Documentation:** [Postman Documentation](https://documenter.getpostman.com/view/37565373/2sA3s3GW7H)
 
 ## Controllers and Endpoints
 
