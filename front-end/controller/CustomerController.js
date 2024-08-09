@@ -39,7 +39,7 @@ $("#customerManage .saveBtn").click(function () {
   }
 });
 
-function validate(customer) {
+async function validate(customer) {
   let valid = true;
 
   if (/^C00-\d{3}$/.test(customer.custId)) {
@@ -82,7 +82,7 @@ function validate(customer) {
     valid = false;
   }
 
-  let customers = getAllCustomers();
+  let customers = await getAllCustomers();
   for (let i = 0; i < customers.length; i++) {
     if (customers[i].custId === customer.custId) {
       $("#customerManage .invalidCustId").text("Customer Id Already Exists");
@@ -203,13 +203,14 @@ $("#customerManage .searchBtn").click(function () {
   }
 });
 
-function reloadTable() {
+async function reloadTable() {
+  let customers = await getAllCustomers();
   $('#CustomerManage .tableRow').empty()
   console.log(customers,"=====================================================table Load");
   // customers.forEach(c => {
   //     loadTable(c);
   // });
-  getAllCustomers().then((customer) =>{
+    getAllCustomers().then((customer) =>{
     customer.forEach((customer) => {
       loadTable(customer);
     })
