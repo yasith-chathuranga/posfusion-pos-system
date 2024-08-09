@@ -15,11 +15,17 @@ $(".orderManageBtn").click(function () {
   refresh();
 });
 
-function refresh() {
+async function refresh() {
   $("#orderManage .orderId").val(createOrderId());
   $("#orderManage .orderDate").val(new Date().toISOString().split("T")[0]);
   loadCustomer();
   loadItems();
+  $('#OrderManage .Total').text("");
+  $('#OrderManage .Balance').val("");
+  $('#OrderManage .Cash').val('');
+  $('#OrderManage .Discount').val('');
+  const allOrder = await getAllOrders();
+  $('.counts .orders h2').text(allOrder.length);
 }
 
 // function extractNumber(id) {
@@ -30,8 +36,8 @@ function refresh() {
 //   return null;
 // }
 
-function createOrderId() {
-  let orders = getAllOrders();
+async function createOrderId() {
+  let orders = await getAllOrders();
 
   if (!orders || orders.length === 0) {
     return "OD0-001";
@@ -48,11 +54,11 @@ function createOrderId() {
   }
 }
 
-function loadCustomer() {
+async function loadCustomer() {
   let cmb = $("#orderManage .customers");
   cmb.empty();
   let option = [];
-  let customers = getAllCustomers();
+  let customers = await getAllCustomers();
   option.unshift("");
   for (let i = 0; i < customers.length; i++) {
     option.push(customers[i].custId);
@@ -63,19 +69,21 @@ function loadCustomer() {
   });
 }
 
-$("#orderManage .customers").change(function () {
-  let customer = getAllCustomers().find((c) => c.custId === $(this).val());
+$("#orderManage .customers").change( async function () {
+  const customers = await getAllCustomers();
+  const customerId = $(this).val();
+  const customer = customers.find(c => c.custId === customerId);
   $("#orderManage .custId").val(customer.custId);
   $("#orderManage .custName").val(customer.custName);
   $("#orderManage .custAddress").val(customer.custAddress);
   $("#orderManage .custSalary").val(customer.custSalary);
 });
 
-function loadItems() {
+async function loadItems() {
   let cmb = $("#orderManage .itemCmb");
   cmb.empty();
   let option = [];
-  let items = getAllItems();
+  let items = await getAllItems();
 
   for (let i = 0; i < items.length; i++) {
     option.push(items[i].itemId);
@@ -88,8 +96,12 @@ function loadItems() {
   });
 }
 
-$("#orderManage .itemCmb").change(function () {
-  let item = getAllItems().find((i) => i.itemId === $(this).val());
+$('#OrderManage .itemCmb').change(async function () {
+  const items = await getAllItems();
+  console.log(items);
+  const getItemId = $(this).val();
+  const item = items.find(c => c.itemId === getItemId);
+  console.log(item);
   itemId = item.itemId;
   itemQty = item.itemQty;
   $("#orderManage .addBtn").text("Add");
@@ -243,13 +255,19 @@ $("#orderManage .placeOrder").click(function () {
   }
 });
 
-function updateItemData() {
-  let items = getAllItems();
+async function updateItemData() {
+  let items = await getAllItems();
   for (let i = 0; i < getItems.length; i++) {
     let item = items.find((I) => I.itemId === getItems[i].itemCode);
     item.itemQty -= getItems[i].itemQty;
     let index = items.findIndex((I) => I.itemId === getItems[i].itemCode);
-    updateItem(index, item);
+    let sendItem = {
+      itemId: item.itemId,
+      itemName: item.itemName,
+      itemQty: item.itemQty,
+      itemPrice: item.itemPrice
+    }
+    updateItem(index, sendItem);
   }
 }
 
